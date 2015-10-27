@@ -1,6 +1,8 @@
 # HtmlToPdf
 
-**TODO: Add description**
+Super simple way to generate a PDF from HTML in Elixir.
+
+At its core, HtmlToPdf wraps the WkHtmlToPdf executable with a couple of simple helper methods.
 
 ## Installation
 
