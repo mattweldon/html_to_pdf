@@ -94,4 +94,19 @@ defmodule HtmlToPdfTest do
 
     assert document.options == %{"--orientation" => "Landscape"}
   end
+
+  test "can chain document functions in a pipeline" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")
+    |> HtmlToPdf.print_landscape
+    |> HtmlToPdf.set_dpi(700)
+    |> HtmlToPdf.set_bottom_margin(50)
+
+    assert document.html == "<h1>Foo Bar</h1>"
+
+    assert document.options == %{
+      "--orientation" => "Landscape",
+      "--dpi" => "700",
+      "--margin-bottom" => "50"}
+  end
 end
