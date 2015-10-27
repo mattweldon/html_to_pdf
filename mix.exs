@@ -5,6 +5,8 @@ defmodule HtmlToPdf.Mixfile do
     [app: :html_to_pdf,
      version: "0.0.1",
      elixir: "~> 1.1",
+     description: description,
+     package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -28,5 +30,17 @@ defmodule HtmlToPdf.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+  defp description do
+    """
+    Super simple library for turning raw HTML or webpages into beautiful PDFs.
+    """
+  end
+
+  defp package do
+    [maintainers: ["Matt Weldon"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/mattweldon/html_to_pdf"}]
   end
 end
