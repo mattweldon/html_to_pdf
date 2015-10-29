@@ -3,7 +3,7 @@ defmodule HtmlToPdf.Mixfile do
 
   def project do
     [app: :html_to_pdf,
-     version: "0.0.1",
+     version: "0.5.0",
      elixir: "~> 1.1",
      description: description,
      package: package,
