@@ -109,4 +109,16 @@ defmodule HtmlToPdfTest do
       "--dpi" => "700",
       "--margin-bottom" => "50"}
   end
+
+  test "can generate a new document" do
+    {:ok, pdf_document} = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")
+    |> HtmlToPdf.print_landscape
+    |> HtmlToPdf.set_dpi(700)
+    |> HtmlToPdf.set_bottom_margin(50)
+    |> HtmlToPdf.generate_pdf
+
+    assert pdf_document |> File.exists?
+    pdf_document |> File.rm!
+  end
 end

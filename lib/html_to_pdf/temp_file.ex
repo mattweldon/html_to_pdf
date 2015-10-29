@@ -1,7 +1,7 @@
 defmodule HtmlToPdf.TempFile do
 
-  def write(contents) do
-    tmp_filepath = filepath
+  def write(:html, contents) do
+    tmp_filepath = filepath("html")
 
     tmp_filepath |> File.touch!
 
@@ -13,11 +13,11 @@ defmodule HtmlToPdf.TempFile do
     {:ok, tmp_filepath}
   end
 
-  def filepath do
+  def filepath(extension) do
     timestamp = HtmlToPdf.Timestamp.generate
     random_number = HtmlToPdf.Random.generate
 
-    System.tmp_dir |> Path.join("tmp_#{timestamp}_#{random_number}")
+    System.tmp_dir |> Path.join("tmp_#{timestamp}_#{random_number}.#{extension}")
   end
 
 end

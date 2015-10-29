@@ -39,4 +39,10 @@ defmodule HtmlToPdf do
     |> HtmlToPdf.Document.put_option("--orientation", "Landscape")
   end
 
+  def generate_pdf(document) do
+    {:ok, html_file_path} = HtmlToPdf.TempFile.write(:html, document.html)
+    IO.inspect HtmlToPdf.TempFile.filepath("pdf")
+    HtmlToPdf.Wkhtmltopdf.execute(html_file_path, HtmlToPdf.TempFile.filepath("pdf"))
+  end
+
 end
