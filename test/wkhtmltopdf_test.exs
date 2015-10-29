@@ -14,10 +14,10 @@ defmodule HtmlToPdf.WkhtmltopdfTest do
         |> Path.join("support")
         |> Path.join("test1.pdf")
 
-    result = HtmlToPdf.Wkhtmltopdf.execute(html_file, pdf_file)
+    result = HtmlToPdf.Wkhtmltopdf.execute(html_file, pdf_file, [])
 
     File.rm!(pdf_file)
-    
+
     assert {:ok, pdf_filename} = result
     assert pdf_filename == pdf_file
   end

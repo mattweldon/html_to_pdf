@@ -40,9 +40,17 @@ defmodule HtmlToPdf do
   end
 
   def generate_pdf(document) do
+    document
+      = document
+        |> HtmlToPdf.Document.put_option("--encoding", "utf-8")
+
     {:ok, html_file_path} = HtmlToPdf.TempFile.write(:html, document.html)
-    IO.inspect HtmlToPdf.TempFile.filepath("pdf")
-    HtmlToPdf.Wkhtmltopdf.execute(html_file_path, HtmlToPdf.TempFile.filepath("pdf"))
+
+    pdf_file_path = HtmlToPdf.TempFile.filepath("pdf")
+
+    options = Enum.map(document.options, fn {k, v} -> [k, v] end) |> List.flatten
+
+    HtmlToPdf.Wkhtmltopdf.execute(html_file_path, pdf_file_path, options)
   end
 
 end

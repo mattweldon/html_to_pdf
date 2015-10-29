@@ -1,9 +1,10 @@
 defmodule HtmlToPdf.Wkhtmltopdf do
 
-  def execute(html_file, pdf_file) do
+  def execute(html_file, pdf_file, options) do
     if program = System.find_executable("wkhtmltopdf") do
-      IO.inspect html_file
-      case System.cmd(program, ["--encoding", "utf-8", html_file, pdf_file]) do
+      options = options ++ [html_file]
+      options = options ++ [pdf_file]
+      case System.cmd(program, options) do
         {_, 0} ->
           {:ok, pdf_file}
         result ->
