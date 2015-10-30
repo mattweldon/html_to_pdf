@@ -8,7 +8,6 @@ defmodule HtmlToPdf.Wkhtmltopdf do
         {_, 0} ->
           {:ok, pdf_file}
         result ->
-          IO.inspect result
           {:error, "An error occurred generating the PDF file #{pdf_file}."}
       end
     else
