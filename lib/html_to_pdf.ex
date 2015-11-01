@@ -54,6 +54,23 @@ defmodule HtmlToPdf do
     |> HtmlToPdf.Document.put_option("--footer-right", text)
   end
 
+  def set_footer_font(document, [family: family]) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-font-name", family)
+  end
+
+  def set_footer_font(document, [size: size]) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-font-size", Integer.to_string(size))
+  end
+
+
+  def set_footer_font(document, [family: family, size: size]) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-font-name", family)
+    |> HtmlToPdf.Document.put_option("--footer-font-size", Integer.to_string(size))
+  end
+
   def generate_pdf(document) do
     document
       = document

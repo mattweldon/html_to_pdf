@@ -131,6 +131,28 @@ defmodule HtmlToPdfTest do
     assert document.options == %{"--footer-center" => "bar"}
   end
 
+  test "adds footer text / font settings of the document to the options map" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_font(family: "Georgia", size: 10)
+
+    assert document.options == %{"--footer-font-name" => "Georgia", "--footer-font-size" => "10"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_font(family: "Times New Roman", size: 14)
+
+    assert document.options == %{"--footer-font-name" => "Times New Roman", "--footer-font-size" => "14"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_font(family: "Georgia")
+
+    assert document.options == %{"--footer-font-name" => "Georgia"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_font(size: 9)
+
+    assert document.options == %{"--footer-font-size" => "9"}
+  end
+
   test "can chain document functions in a pipeline" do
     document = %HtmlToPdf.Document{}
     |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")
