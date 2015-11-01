@@ -39,6 +39,21 @@ defmodule HtmlToPdf do
     |> HtmlToPdf.Document.put_option("--orientation", "Landscape")
   end
 
+  def set_left_footer_text(document, text) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-left", text)
+  end
+
+  def set_center_footer_text(document, text) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-center", text)
+  end
+
+  def set_right_footer_text(document, text) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-right", text)
+  end
+
   def generate_pdf(document) do
     document
       = document

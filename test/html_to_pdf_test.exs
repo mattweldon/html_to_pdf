@@ -95,6 +95,42 @@ defmodule HtmlToPdfTest do
     assert document.options == %{"--orientation" => "Landscape"}
   end
 
+  test "adds the left-aligned footer text of the document to the options map" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_left_footer_text("foo")
+
+    assert document.options == %{"--footer-left" => "foo"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_left_footer_text("bar")
+
+    assert document.options == %{"--footer-left" => "bar"}
+  end
+
+  test "adds the right-aligned footer text of the document to the options map" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_right_footer_text("foo")
+
+    assert document.options == %{"--footer-right" => "foo"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_right_footer_text("bar")
+
+    assert document.options == %{"--footer-right" => "bar"}
+  end
+
+  test "adds the center-aligned footer text of the document to the options map" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_center_footer_text("foo")
+
+    assert document.options == %{"--footer-center" => "foo"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_center_footer_text("bar")
+
+    assert document.options == %{"--footer-center" => "bar"}
+  end
+
   test "can chain document functions in a pipeline" do
     document = %HtmlToPdf.Document{}
     |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")
