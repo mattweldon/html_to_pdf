@@ -153,6 +153,18 @@ defmodule HtmlToPdfTest do
     assert document.options == %{"--footer-font-size" => "9"}
   end
 
+  test "adds the footer spacing of the document to the options map" do
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_spacing(10)
+
+    assert document.options == %{"--footer-spacing" => "10"}
+
+    document = %HtmlToPdf.Document{}
+    |> HtmlToPdf.set_footer_spacing(12)
+
+    assert document.options == %{"--footer-spacing" => "12"}
+  end
+
   test "can chain document functions in a pipeline" do
     document = %HtmlToPdf.Document{}
     |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")
