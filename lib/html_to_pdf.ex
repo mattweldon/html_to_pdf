@@ -89,7 +89,16 @@ defmodule HtmlToPdf do
 
     pdf_file_path = HtmlToPdf.TempFile.filepath("pdf")
 
-    options = Enum.map(document.options, fn {k, v} -> [k, v] end) |> List.flatten
+    options = Enum.map(document.options, fn {k, v} ->
+      case {k, v} do
+        {k, ""} ->
+          [k]
+        {k, nil} ->
+          [k]
+        {k, v} ->
+          [k, v]
+      end
+    end) |> List.flatten
 
     HtmlToPdf.Wkhtmltopdf.execute(html_file_path, pdf_file_path, options)
   end
