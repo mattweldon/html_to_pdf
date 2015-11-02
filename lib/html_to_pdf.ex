@@ -69,6 +69,11 @@ defmodule HtmlToPdf do
     |> HtmlToPdf.Document.put_option("--footer-spacing", Integer.to_string(spacing))
   end
 
+  def add_footer_line(document) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-line", "")
+  end
+
   def set_footer_font(document, [family: family, size: size]) do
     document
     |> HtmlToPdf.Document.put_option("--footer-font-name", family)
