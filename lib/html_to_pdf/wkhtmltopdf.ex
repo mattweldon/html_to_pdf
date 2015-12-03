@@ -8,7 +8,7 @@ defmodule HtmlToPdf.Wkhtmltopdf do
         {_, 0} ->
           {:ok, pdf_file}
         result ->
-          {:error, "An error occurred generating the PDF file #{pdf_file}."}
+          {:error, "An error occurred generating the PDF file #{pdf_file}. The following results were returned: #{result}"}
       end
     else
       {:error, "Unable to find the wkhtmltopdf executable in the system path."}

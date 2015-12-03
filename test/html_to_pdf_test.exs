@@ -187,6 +187,16 @@ defmodule HtmlToPdfTest do
       "--margin-bottom" => "50"}
   end
 
+  test "options map flattened to list" do
+    options_list = HtmlToPdf.options_map_to_list(%{"--no-value-needed" => ""})
+
+    assert options_list == ["--no-value-needed"]
+
+    options_list = HtmlToPdf.options_map_to_list(%{"--no-value-needed" => "", "--value-required" => "value"})
+
+    assert options_list == ["--no-value-needed", "--value-required", "value"]
+  end
+
   test "can generate a new document" do
     {:ok, pdf_document} = %HtmlToPdf.Document{}
     |> HtmlToPdf.set_html("<h1>Foo Bar</h1>")

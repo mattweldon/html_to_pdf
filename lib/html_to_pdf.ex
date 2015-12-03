@@ -64,6 +64,12 @@ defmodule HtmlToPdf do
     |> HtmlToPdf.Document.put_option("--footer-font-size", Integer.to_string(size))
   end
 
+  def set_footer_font(document, [family: family, size: size]) do
+    document
+    |> HtmlToPdf.Document.put_option("--footer-font-name", family)
+    |> HtmlToPdf.Document.put_option("--footer-font-size", Integer.to_string(size))
+  end
+
   def set_footer_spacing(document, spacing) do
     document
     |> HtmlToPdf.Document.put_option("--footer-spacing", Integer.to_string(spacing))
@@ -72,12 +78,6 @@ defmodule HtmlToPdf do
   def add_footer_line(document) do
     document
     |> HtmlToPdf.Document.put_option("--footer-line", "")
-  end
-
-  def set_footer_font(document, [family: family, size: size]) do
-    document
-    |> HtmlToPdf.Document.put_option("--footer-font-name", family)
-    |> HtmlToPdf.Document.put_option("--footer-font-size", Integer.to_string(size))
   end
 
   def generate_pdf(document) do
@@ -89,7 +89,11 @@ defmodule HtmlToPdf do
 
     pdf_file_path = HtmlToPdf.TempFile.filepath("pdf")
 
-    options = Enum.map(document.options, fn {k, v} ->
+    HtmlToPdf.Wkhtmltopdf.execute(html_file_path, pdf_file_path, document.options |> options_map_to_list)
+  end
+
+  def options_map_to_list(options) do
+    Enum.map(options, fn {k, v} ->
       case {k, v} do
         {k, ""} ->
           [k]
@@ -99,8 +103,6 @@ defmodule HtmlToPdf do
           [k, v]
       end
     end) |> List.flatten
-
-    HtmlToPdf.Wkhtmltopdf.execute(html_file_path, pdf_file_path, options)
   end
 
 end
