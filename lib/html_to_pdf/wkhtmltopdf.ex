@@ -7,7 +7,7 @@ defmodule HtmlToPdf.Wkhtmltopdf do
       case System.cmd(program, options) do
         {_, 0} ->
           {:ok, pdf_file}
-        result ->
+        {result, 1} ->
           {:error, "An error occurred generating the PDF file #{pdf_file}. The following results were returned: #{result}"}
       end
     else
