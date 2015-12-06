@@ -19,3 +19,10 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:html_to_pdf]]
         end
+
+## Installing WKHTMLTOPDF on Ubuntu 14.04
+
+```
+wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+sudo dpkg -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+```
