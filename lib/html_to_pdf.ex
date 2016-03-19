@@ -1,4 +1,10 @@
 defmodule HtmlToPdf do
+  use Application
+
+  def start,  do: start(:normal, [])
+  def start(type, args) do
+    HtmlToPdf.Supervisor.start_link(type, args)
+  end
 
   def set_html(document, html) do
     %{document | html: html}
